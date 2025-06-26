@@ -1,8 +1,8 @@
 package api
 
 import (
-	"ewallet-framework/helpers"
-	"ewallet-framework/internal/interfaces"
+	"ewallet-ums/helpers"
+	"ewallet-ums/internal/interfaces"
 
 	"github.com/gin-gonic/gin"
 )
