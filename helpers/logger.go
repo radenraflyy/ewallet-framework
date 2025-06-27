@@ -4,7 +4,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func SetUpLogger() *logrus.Logger {
+var Logger *logrus.Logger
+
+func SetUpLogger() {
 	log := logrus.New()
 
 	log.SetFormatter(&logrus.JSONFormatter{
@@ -12,5 +14,5 @@ func SetUpLogger() *logrus.Logger {
 	})
 
 	log.Info("Logger initialized")
-	return log
+	Logger = log
 }

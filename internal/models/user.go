@@ -14,7 +14,7 @@ type User struct {
 	Address     string    `json:"address" gorm:"not null"`
 	DateOfBirth string    `json:"date_of_birth" gorm:"not null"`
 	FullName    string    `json:"full_name" gorm:"not null" validate:"required"`
-	Password    string    `json:"password" gorm:"not null" validate:"required,min=8,max=100"`
+	Password    string    `json:"password,omitempty" gorm:"not null" validate:"required,min=8,max=100"`
 	CreatedAt   time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt   time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
