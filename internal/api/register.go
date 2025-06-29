@@ -10,7 +10,7 @@ import (
 )
 
 type RegisterUserHandler struct {
-	RegisterService interfaces.IRegisterService
+	RegisterService interfaces.IRegisterRepository
 }
 
 func (r *RegisterUserHandler) RegisterUserHandlerHttp(c *gin.Context) {

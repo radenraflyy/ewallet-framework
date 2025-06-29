@@ -3,6 +3,7 @@ package api
 import (
 	"ewallet-ums/helpers"
 	"ewallet-ums/internal/interfaces"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +15,7 @@ type HealthCheck struct {
 func (api *HealthCheck) HealthCheckHandleHttp(ctx *gin.Context) {
 	msg, err := api.HealthCheckService.HealthCheckServices()
 	if err != nil {
-		ctx.JSON(500, gin.H{
+		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"status":  "error",
 			"message": err.Error(),
 		})

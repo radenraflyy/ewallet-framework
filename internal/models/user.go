@@ -32,8 +32,8 @@ type UserSession struct {
 	UserID             uint      `json:"user_id" gorm:"not null" validate:"required"`
 	Token              string    `json:"token" gorm:"not null" validate:"required"`
 	RefreshToken       string    `json:"refresh_token" gorm:"not null" validate:"required"`
-	TokenExpiry        string    `json:"token_expiry" gorm:"not null" validate:"required"`
-	RefreshTokenExpiry string    `json:"refresh_token_expiry" gorm:"not null" validate:"required"`
+	TokenExpiry        time.Time `json:"token_expiry" gorm:"not null" validate:"required"`
+	RefreshTokenExpiry time.Time `json:"refresh_token_expiry" gorm:"not null" validate:"required"`
 	CreatedAt          time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt          time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }

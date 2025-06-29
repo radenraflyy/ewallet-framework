@@ -3,12 +3,14 @@ package interfaces
 import (
 	"context"
 	"ewallet-ums/internal/models"
+
+	"github.com/gin-gonic/gin"
 )
 
 type IRegisterRepository interface {
-	InsertNewUser(ctx context.Context, user *models.User) error
+	RegisterUser(ctx context.Context, req *models.User) (interface{}, error)
 }
 
-type IRegisterService interface {
-	RegisterUser(ctx context.Context, req *models.User) (interface{}, error)
+type IRegisterUserHandler interface {
+	RegisterUserHandlerHttp(c *gin.Context)
 }
