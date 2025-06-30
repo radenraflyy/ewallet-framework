@@ -34,11 +34,13 @@ type Dependency struct {
 	RegisterApi    interfaces.IRegisterUserHandler
 	LoginApi       interfaces.ILoginHandler
 	LogoutApi      interfaces.ILogoutHandler
+
+	TokenValidationApi *api.TokenValidationHandler
 }
 
 func depedencyInject() Dependency {
 	healthCheckSvc := &services.Healthcheck{}
-	healthCheckApi := api.HealthCheck{
+	healthCheckApi := &api.HealthCheck{
 		HealthCheckService: healthCheckSvc,
 	}
 
@@ -48,28 +50,43 @@ func depedencyInject() Dependency {
 	registerSvc := &services.RegisterService{
 		UserRepository: userRepo,
 	}
-	registerApi := api.RegisterUserHandler{
+	registerApi := &api.RegisterUserHandler{
 		RegisterService: registerSvc,
 	}
 
 	loginSvc := &services.LoginService{
 		UserRepo: userRepo,
 	}
-	loginApi := api.LoginHandler{
+	loginApi := &api.LoginHandler{
 		LoginService: loginSvc,
 	}
 
 	logoutSvc := &services.LogoutService{
 		UserRepo: userRepo,
 	}
-	logoutApi := api.LogoutHandler{
+	logoutApi := &api.LogoutHandler{
 		LogoutService: logoutSvc,
 	}
-	return Dependency{
+
+	// tokenValidationAPI := api.TokenValidationHandler{
+	// 	TokenValidationService: &services.TokenValidationService{
+	// 		UserRepository: userRepo,
+	// 	},
+	// }
+
+	tokenValidationSvc := &services.TokenValidationService{
 		UserRepository: userRepo,
-		HealthCheckApi: &healthCheckApi,
-		RegisterApi:    &registerApi,
-		LoginApi:       &loginApi,
-		LogoutApi:      &logoutApi,
+	}
+	tokenValidationAPI := &api.TokenValidationHandler{
+		TokenValidationService: tokenValidationSvc,
+	}
+
+	return Dependency{
+		UserRepository:     userRepo,
+		HealthCheckApi:     healthCheckApi,
+		RegisterApi:        registerApi,
+		LoginApi:           loginApi,
+		LogoutApi:          logoutApi,
+		TokenValidationApi: tokenValidationAPI,
 	}
 }
