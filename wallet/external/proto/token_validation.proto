@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package tokenvalidation;
+
+option go_package = "./tokenvalidation";
+
+// Defien the request message for token validation
+service TokenValidationService {
+  // the method to validate a token
+  rpc ValidateToken (TokenRequest) returns (TokenResponse);
+}
+
+// the request message containing the token to be validated
+message TokenRequest {
+  string token = 1;
+}
+
+// the response message
+message TokenResponse {
+  string message = 1; // Message indicating success or failure
+  UserData data = 2; // the user data if the token is valid
+}
+
+// the user data returned if the token is valid
+message UserData {
+  string username = 1; // the username of the user
+  int64 user_id = 2; // the unique identifier of the user
+}

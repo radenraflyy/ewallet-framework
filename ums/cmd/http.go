@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"log"
+	"ums/external"
 	"ums/helpers"
 	"ums/internal/api"
 	"ums/internal/interfaces"
@@ -44,11 +45,14 @@ func depedencyInject() Dependency {
 		HealthCheckService: healthCheckSvc,
 	}
 
+	extWallet := &external.ExtWallet{}
+
 	userRepo := &repository.UserRepository{
 		DB: helpers.DB,
 	}
 	registerSvc := &services.RegisterService{
 		UserRepository: userRepo,
+		ExternalWallet: extWallet,
 	}
 	registerApi := &api.RegisterUserHandler{
 		RegisterService: registerSvc,
